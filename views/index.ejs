@@ -1,68 +1,75 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
     <title>Mi Estantería</title>
-    <link rel="stylesheet" href="/css/global.css">
+    <%- include('partials/head') %>
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 
-    <h1>📚 Mi Estantería</h1>
-    <p class="subtitulo">Todos mis libros en un solo lugar</p>
+    <%- include('partials/nav') %>
 
-    <a class="btn-nuevo" href="/libros/nuevo">+ Añadir libro</a>
-    <a class="btn-stats" href="/estadisticas">📊 Ver estadísticas</a>
+    <main class="container">
 
-    <!-- Buscador -->
-    <form class="buscador" action="/libros" method="GET">
-        <input
-            type="text"
-            name="busqueda"
-            placeholder="Buscar por título o autor..."
-            value="<%= busqueda || '' %>"
-        >
-        <button type="submit">🔍 Buscar</button>
-    </form>
+        <!-- Buscador -->
+        <form class="buscador" action="/libros" method="GET">
+            <input type="search" name="busqueda" placeholder="Buscar por título o autor..."
+                value="<%= busqueda || '' %>">
+            <button type="submit">🔍 Buscar</button>
+        </form>
 
-    <!-- Enlace para limpiar búsqueda -->
-    <% if (busqueda) { %>
-        <a class="btn-limpiar" href="/libros">✕ Limpiar búsqueda</a>
-        <p class="resultado-busqueda">Resultados para: <strong>"<%= busqueda %>"</strong></p>
-    <% } %>
+        <% if (busqueda) { %>
+            <p class="resultado-busqueda">
+                Resultados para: <strong>"<%= busqueda %>"</strong>
+                <a href="/libros">✕ Limpiar</a>
+            </p>
+        <% } %>
 
-    <!-- Filtros por estado -->
-    <div class="filtros">
-        <a href="/libros" class="filtro <%= !estado && !busqueda ? 'activo' : '' %>">Todos</a>
-        <a href="/libros?estado=pendiente" class="filtro <%= estado === 'pendiente' ? 'activo' : '' %>">Pendiente</a>
-        <a href="/libros?estado=leyendo" class="filtro <%= estado === 'leyendo' ? 'activo' : '' %>">Leyendo</a>
-        <a href="/libros?estado=terminado" class="filtro <%= estado === 'terminado' ? 'activo' : '' %>">Terminado</a>
-    </div>
-
-    <% if (lista.length === 0) { %>
-        <p class="vacio">No se encontraron libros.</p>
-    <% } else { %>
-        <div class="grid">
-            <% lista.forEach(libro => { %>
-                <div class="card">
-                    <h2><a href="/libros/<%= libro.id %>" style="color: #3d2b1f; text-decoration: none;"><%= libro.titulo %></a></h2>
-                    <p class="autor"><%= libro.autor %></p>
-                    <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
-                    <p class="estrellas">
-                        <% for(let i = 1; i <= 5; i++) { %>
-                            <%= i <= libro.valoracion ? '★' : '☆' %>
-                        <% } %>
-                    </p>
-                    <div class="acciones">
-                        <a class="btn-editar" href="/libros/<%= libro.id %>/editar">✏️ Editar</a>
-                        <form action="/libros/<%= libro.id %>?_method=DELETE" method="POST">
-                            <button class="btn-eliminar" type="submit">🗑️ Eliminar</button>
-                        </form>
-                    </div>
-                </div>
-            <% }) %>
+        <!-- Filtros -->
+        <div class="filtros">
+            <a href="/libros" class="filtro <%= !estado && !busqueda ? 'activo' : '' %>">Todos</a>
+            <a href="/libros?estado=pendiente" class="filtro <%= estado === 'pendiente' ? 'activo' : '' %>">📋 Pendiente</a>
+            <a href="/libros?estado=leyendo" class="filtro <%= estado === 'leyendo' ? 'activo' : '' %>">📖 Leyendo</a>
+            <a href="/libros?estado=terminado" class="filtro <%= estado === 'terminado' ? 'activo' : '' %>">✅ Terminado</a>
         </div>
-    <% } %>
+
+        <!-- Grid de libros -->
+        <% if (lista.length === 0) { %>
+            <div class="vacio">
+                <p>📭 No se encontraron libros.</p>
+                <a href="/libros/nuevo" role="button">Añadir el primero</a>
+            </div>
+        <% } else { %>
+            <div class="grid-libros">
+                <% lista.forEach(libro => { %>
+                    <article class="card-libro">
+                        <header>
+                            <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
+                            <% if (libro.genero) { %>
+                                <span class="badge-genero"><%= libro.genero %></span>
+                            <% } %>
+                        </header>
+                        <a href="/libros/<%= libro.id %>" class="titulo-link">
+                            <h3><%= libro.titulo %></h3>
+                        </a>
+                        <p class="autor">— <%= libro.autor %></p>
+                        <p class="estrellas">
+                            <% for(let i = 1; i <= 5; i++) { %>
+                                <%= i <= libro.valoracion ? '★' : '☆' %>
+                            <% } %>
+                        </p>
+                        <footer class="acciones">
+                            <a href="/libros/<%= libro.id %>/editar" role="button" class="outline">✏️ Editar</a>
+                            <form action="/libros/<%= libro.id %>?_method=DELETE" method="POST">
+                                <button class="outline secondary" type="submit">🗑️</button>
+                            </form>
+                        </footer>
+                    </article>
+                <% }) %>
+            </div>
+        <% } %>
+
+    </main>
 
 </body>
 </html>

@@ -1,64 +1,78 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
     <title>Estadísticas</title>
-    <link rel="stylesheet" href="/css/global.css">
+    <%- include('partials/head') %>
     <link rel="stylesheet" href="/css/estadisticas.css">
 </head>
 <body>
 
-    <h1>📊 Estadísticas</h1>
-    <p class="subtitulo">Un vistazo a tu estantería</p>
+    <%- include('partials/nav') %>
 
-    <!-- Tarjetas resumen -->
-    <div class="grid-stats">
-        <div class="card-stat">
-            <div class="numero"><%= stats.total %></div>
-            <div class="etiqueta">📚 Libros en total</div>
-        </div>
+    <main class="container">
 
-        <div class="card-stat">
-            <div class="numero"><%= stats.mediaValoracion > 0 ? stats.mediaValoracion + ' ★' : 'N/A' %></div>
-            <div class="etiqueta">⭐ Media de valoración</div>
-        </div>
+        <hgroup class="stats-header">
+            <h1>📊 Estadísticas</h1>
+            <p>Un vistazo a tu estantería</p>
+        </hgroup>
 
-        <div class="card-stat">
-            <div class="numero"><%= stats.generoFavorito %></div>
-            <div class="etiqueta">🏷️ Género más leído</div>
-        </div>
+        <!-- Tarjetas resumen -->
+        <div class="grid-stats">
+            <article class="card-stat">
+                <div class="stat-numero"><%= stats.total %></div>
+                <div class="stat-etiqueta">📚 Libros en total</div>
+            </article>
 
-        <div class="card-stat">
-            <div class="numero"><%= stats.totalConFechas %></div>
-            <div class="etiqueta">📅 Libros con fechas registradas</div>
-        </div>
-    </div>
-
-    <!-- Barras por estado -->
-    <div class="estados">
-        <h2>📈 Libros por estado</h2>
-        <% stats.porEstado.forEach(item => { %>
-            <div class="barra-contenedor">
-                <div class="barra-label">
-                    <span><%= item.estado %></span>
-                    <span><%= item.cantidad %> libro<%= item.cantidad !== 1 ? 's' : '' %></span>
+            <article class="card-stat">
+                <div class="stat-numero">
+                    <%= stats.mediaValoracion > 0 ? stats.mediaValoracion : 'N/A' %>
                 </div>
-                <div class="barra">
-                    <div class="barra-relleno <%= item.estado %>"
-                        data-ancho="<%= stats.total > 0 ? (item.cantidad / stats.total * 100) : 0 %>">
+                <div class="stat-etiqueta">⭐ Media de valoración</div>
+            </article>
+
+            <article class="card-stat">
+                <div class="stat-numero stat-genero"><%= stats.generoFavorito %></div>
+                <div class="stat-etiqueta">🏷️ Género más leído</div>
+            </article>
+
+            <article class="card-stat">
+                <div class="stat-numero"><%= stats.totalConFechas %></div>
+                <div class="stat-etiqueta">📅 Con fechas registradas</div>
+            </article>
+        </div>
+
+        <!-- Barras por estado -->
+        <article class="estados-card">
+            <h2>📈 Libros por estado</h2>
+
+            <% if (stats.porEstado.length === 0) { %>
+                <p style="color: var(--pico-muted-color)">No hay datos todavía.</p>
+            <% } else { %>
+                <% stats.porEstado.forEach(item => { %>
+                    <div class="barra-contenedor">
+                        <div class="barra-label">
+                            <span class="badge <%= item.estado %>"><%= item.estado %></span>
+                            <span class="barra-cantidad">
+                                <%= item.cantidad %> libro<%= item.cantidad !== 1 ? 's' : '' %>
+                            </span>
+                        </div>
+                        <div class="barra">
+                            <div class="barra-relleno <%= item.estado %>"
+                                data-ancho="<%= stats.total > 0 ? (item.cantidad / stats.total * 100) : 0 %>">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        <% }) %>
-    </div>
+                <% }) %>
+            <% } %>
+        </article>
 
-    <a class="btn-volver" href="/libros">↩️ Volver a la estantería</a>
+    </main>
 
     <script>
-    document.querySelectorAll('.barra-relleno').forEach(barra => {
-        barra.style.width = barra.dataset.ancho + '%';
-    });
-</script>
+        document.querySelectorAll('.barra-relleno').forEach(barra => {
+            barra.style.width = barra.dataset.ancho + '%';
+        });
+    </script>
 
 </body>
 </html>

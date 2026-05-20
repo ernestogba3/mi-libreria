@@ -1,96 +1,115 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
     <title>Editar Libro</title>
-    <link rel="stylesheet" href="/css/global.css">
+    <%- include('partials/head') %>
     <link rel="stylesheet" href="/css/formulario.css">
 </head>
 <body>
 
-    <h1>✏️ Editar libro</h1>
+    <%- include('partials/nav') %>
 
-    <div class="formulario">
+    <main class="container">
+        <div class="formulario-wrapper">
 
-        <% if (errores.length > 0) { %>
-            <div class="errores">
-                <% errores.forEach(error => { %>
-                    <p>⚠️ <%= error %></p>
-                <% }) %>
-            </div>
-        <% } %>
+            <hgroup>
+                <h1>✏️ Editar libro</h1>
+                <p>Modifica los datos del libro</p>
+            </hgroup>
 
-        <form action="/libros/<%= libro.id %>?_method=PUT" method="POST">
+            <% if (errores.length > 0) { %>
+                <div class="errores">
+                    <% errores.forEach(error => { %>
+                        <p>⚠️ <%= error %></p>
+                    <% }) %>
+                </div>
+            <% } %>
 
-            <label>Título</label>
-            <input type="text" name="titulo" value="<%= libro.titulo %>" required>
+            <form action="/libros/<%= libro.id %>?_method=PUT" method="POST">
 
-            <label>Autor</label>
-            <input type="text" name="autor" value="<%= libro.autor %>" required>
+                <div class="campo-grupo">
+                    <label>Título</label>
+                    <input type="text" name="titulo" value="<%= libro.titulo %>" required>
+                </div>
 
-            <label>Género</label>
-            <select name="genero">
-                <option value="">Sin especificar</option>
-                <option value="Ficción" <%= libro.genero === 'Ficción' ? 'selected' : '' %>>Ficción</option>
-                <option value="No ficción" <%= libro.genero === 'No ficción' ? 'selected' : '' %>>No ficción</option>
-                <option value="Fantasía" <%= libro.genero === 'Fantasía' ? 'selected' : '' %>>Fantasía</option>
-                <option value="Ciencia ficción" <%= libro.genero === 'Ciencia ficción' ? 'selected' : '' %>>Ciencia ficción</option>
-                <option value="Terror" <%= libro.genero === 'Terror' ? 'selected' : '' %>>Terror</option>
-                <option value="Misterio" <%= libro.genero === 'Misterio' ? 'selected' : '' %>>Misterio</option>
-                <option value="Romance" <%= libro.genero === 'Romance' ? 'selected' : '' %>>Romance</option>
-                <option value="Historia" <%= libro.genero === 'Historia' ? 'selected' : '' %>>Historia</option>
-                <option value="Biografía" <%= libro.genero === 'Biografía' ? 'selected' : '' %>>Biografía</option>
-                <option value="Autoayuda" <%= libro.genero === 'Autoayuda' ? 'selected' : '' %>>Autoayuda</option>
-            </select>
+                <div class="campo-grupo">
+                    <label>Autor</label>
+                    <input type="text" name="autor" value="<%= libro.autor %>" required>
+                </div>
 
-            <label>Estado</label>
-            <select name="estado">
-                <option value="pendiente" <%= libro.estado === 'pendiente' ? 'selected' : '' %>>Pendiente</option>
-                <option value="leyendo" <%= libro.estado === 'leyendo' ? 'selected' : '' %>>Leyendo</option>
-                <option value="terminado" <%= libro.estado === 'terminado' ? 'selected' : '' %>>Terminado</option>
-            </select>
+                <div class="campo-fila">
+                    <div class="campo-grupo">
+                        <label>Género</label>
+                        <select name="genero">
+                            <option value="">Sin especificar</option>
+                            <option value="Ficción" <%= libro.genero === 'Ficción' ? 'selected' : '' %>>Ficción</option>
+                            <option value="No ficción" <%= libro.genero === 'No ficción' ? 'selected' : '' %>>No ficción</option>
+                            <option value="Fantasía" <%= libro.genero === 'Fantasía' ? 'selected' : '' %>>Fantasía</option>
+                            <option value="Ciencia ficción" <%= libro.genero === 'Ciencia ficción' ? 'selected' : '' %>>Ciencia ficción</option>
+                            <option value="Terror" <%= libro.genero === 'Terror' ? 'selected' : '' %>>Terror</option>
+                            <option value="Misterio" <%= libro.genero === 'Misterio' ? 'selected' : '' %>>Misterio</option>
+                            <option value="Romance" <%= libro.genero === 'Romance' ? 'selected' : '' %>>Romance</option>
+                            <option value="Historia" <%= libro.genero === 'Historia' ? 'selected' : '' %>>Historia</option>
+                            <option value="Biografía" <%= libro.genero === 'Biografía' ? 'selected' : '' %>>Biografía</option>
+                            <option value="Autoayuda" <%= libro.genero === 'Autoayuda' ? 'selected' : '' %>>Autoayuda</option>
+                        </select>
+                    </div>
 
-            <label>Valoración</label>
-            <select name="valoracion">
-                <option value="0" <%= libro.valoracion == 0 ? 'selected' : '' %>>Sin valorar</option>
-                <option value="1" <%= libro.valoracion == 1 ? 'selected' : '' %>>★ 1</option>
-                <option value="2" <%= libro.valoracion == 2 ? 'selected' : '' %>>★★ 2</option>
-                <option value="3" <%= libro.valoracion == 3 ? 'selected' : '' %>>★★★ 3</option>
-                <option value="4" <%= libro.valoracion == 4 ? 'selected' : '' %>>★★★★ 4</option>
-                <option value="5" <%= libro.valoracion == 5 ? 'selected' : '' %>>★★★★★ 5</option>
-            </select>
+                    <div class="campo-grupo">
+                        <label>Estado</label>
+                        <select name="estado">
+                            <option value="pendiente" <%= libro.estado === 'pendiente' ? 'selected' : '' %>>📋 Pendiente</option>
+                            <option value="leyendo" <%= libro.estado === 'leyendo' ? 'selected' : '' %>>📖 Leyendo</option>
+                            <option value="terminado" <%= libro.estado === 'terminado' ? 'selected' : '' %>>✅ Terminado</option>
+                        </select>
+                    </div>
+                </div>
 
-            <label>Fecha de inicio</label>
-            <input type="date" name="fecha_inicio" value="<%= libro.fecha_inicio || '' %>">
-            <p class="hint">Opcional — cuándo empezaste a leerlo</p>
+                <div class="campo-grupo">
+                    <label>Valoración</label>
+                    <select name="valoracion">
+                        <option value="0" <%= libro.valoracion == 0 ? 'selected' : '' %>>Sin valorar</option>
+                        <option value="1" <%= libro.valoracion == 1 ? 'selected' : '' %>>★ 1</option>
+                        <option value="2" <%= libro.valoracion == 2 ? 'selected' : '' %>>★★ 2</option>
+                        <option value="3" <%= libro.valoracion == 3 ? 'selected' : '' %>>★★★ 3</option>
+                        <option value="4" <%= libro.valoracion == 4 ? 'selected' : '' %>>★★★★ 4</option>
+                        <option value="5" <%= libro.valoracion == 5 ? 'selected' : '' %>>★★★★★ 5</option>
+                    </select>
+                </div>
 
-            <label>Fecha de fin</label>
-            <input type="date" name="fecha_fin" value="<%= libro.fecha_fin || '' %>">
-            <p class="hint">Opcional — cuándo lo terminaste</p>
+                <div class="campo-fila">
+                    <div class="campo-grupo">
+                        <label>Fecha de inicio</label>
+                        <input type="date" name="fecha_inicio" value="<%= libro.fecha_inicio || '' %>">
+                    </div>
+                    <div class="campo-grupo">
+                        <label>Fecha de fin</label>
+                        <input type="date" name="fecha_fin" value="<%= libro.fecha_fin || '' %>">
+                    </div>
+                </div>
 
-            <!-- 👇 Nuevo campo notas -->
-            <label>Notas personales</label>
-            <textarea name="notas" id="notas" placeholder="Tus impresiones sobre el libro..."><%= libro.notas || '' %></textarea>
-            <p class="contador" id="contador"><%= libro.notas ? libro.notas.length : 0 %> / 500 caracteres</p>
+                <div class="campo-grupo">
+                    <label>Notas personales</label>
+                    <textarea name="notas" id="notas" placeholder="Tus impresiones sobre el libro..."><%= libro.notas || '' %></textarea>
+                    <p class="contador" id="contador"><%= libro.notas ? libro.notas.length : 0 %> / 500 caracteres</p>
+                </div>
 
-            <button class="btn-guardar" type="submit">💾 Guardar cambios</button>
-        </form>
+                <div class="campo-acciones">
+                    <a href="/libros" role="button" class="secondary">↩️ Cancelar</a>
+                    <button type="submit">💾 Guardar cambios</button>
+                </div>
 
-        <a class="btn-cancelar" href="/libros">↩️ Cancelar</a>
-    </div>
+            </form>
+        </div>
+    </main>
 
     <script>
         const textarea = document.getElementById('notas');
         const contador = document.getElementById('contador');
-
         textarea.addEventListener('input', () => {
             const longitud = textarea.value.length;
             contador.textContent = `${longitud} / 500 caracteres`;
-            if (longitud > 500) {
-                contador.classList.add('limite');
-            } else {
-                contador.classList.remove('limite');
-            }
+            contador.classList.toggle('limite', longitud > 500);
         });
     </script>
 

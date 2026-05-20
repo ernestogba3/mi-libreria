@@ -1,162 +1,162 @@
-.btn-nuevo {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 20px;
-    background: #3d2b1f;
-    color: white;
-    padding: 10px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-}
-
-.btn-stats {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 20px;
-    background: #7a5c44;
-    color: white;
-    padding: 10px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-}
-
+/* Buscador */
 .buscador {
     display: flex;
-    justify-content: center;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .buscador input {
-    padding: 8px 16px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    width: 300px;
+    flex: 1;
+    margin: 0;
 }
 
 .buscador button {
-    padding: 8px 16px;
-    background: #3d2b1f;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+    width: auto;
+    margin: 0;
 }
 
-.btn-limpiar {
-    display: block;
-    text-align: center;
-    color: #7a5c44;
+/* Resultado búsqueda */
+.resultado-busqueda {
+    color: var(--pico-muted-color);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.resultado-busqueda a {
+    margin-left: 8px;
+    color: var(--pico-muted-color);
     font-size: 0.85rem;
-    margin-bottom: 20px;
-    text-decoration: none;
 }
 
+/* Filtros */
 .filtros {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
 }
 
 .filtro {
     padding: 6px 16px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 0.9rem;
-    background: #e0d6cc;
-    color: #3d2b1f;
+    font-size: 0.85rem;
+    background: var(--pico-card-background-color);
+    color: var(--pico-muted-color);
+    border: 1px solid var(--pico-muted-border-color);
+    transition: all 0.2s;
 }
 
 .filtro.activo {
-    background: #3d2b1f;
-    color: white;
+    background: var(--pico-primary);
+    color: var(--pico-primary-inverse);
+    border-color: var(--pico-primary);
 }
 
-.grid {
+/* Grid libros */
+.grid-libros {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
-.card {
-    background: white;
-    border-radius: 10px;
+/* Tarjeta libro */
+.card-libro {
+    border-radius: var(--pico-border-radius);
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-left: 5px solid #3d2b1f;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card h2 {
-    color: #3d2b1f;
-    font-size: 1.1rem;
-    margin-bottom: 6px;
+.card-libro:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
-.card .autor {
-    color: #7a5c44;
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.pendiente { background: #fdebd0; color: #d35400; }
-.leyendo { background: #d5f5e3; color: #1e8449; }
-.terminado { background: #d6eaf8; color: #1a5276; }
-
-.estrellas {
-    color: #f0a500;
-    font-size: 1.1rem;
-    margin-bottom: 14px;
-}
-
-.acciones {
+.card-libro header {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 4px;
+    background: none;
+    border: none;
 }
 
-.btn-editar {
-    background: #f0a500;
-    color: white;
-    padding: 6px 12px;
+.card-libro footer {
+    display: flex;
+    gap: 8px;
+    padding: 0;
+    margin-top: auto;
+    background: none;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+}
+
+.card-libro footer form {
+    margin: 0;
+}
+
+.card-libro footer button {
+    margin: 0;
+    width: auto;
+    padding: 8px 12px;
+}
+
+.card-libro footer a {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+}
+
+/* Título enlace */
+.titulo-link {
     text-decoration: none;
-    font-size: 0.85rem;
+    color: var(--pico-color);
 }
 
-.btn-eliminar {
-    background: #e74c3c;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
+.titulo-link h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.3;
 }
 
+.titulo-link:hover h3 {
+    color: var(--pico-primary);
+}
+
+/* Autor */
+.autor {
+    color: var(--pico-muted-color);
+    font-size: 0.9rem;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Badge género */
+.badge-genero {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background: var(--pico-card-sectioning-background-color);
+    color: var(--pico-muted-color);
+}
+
+/* Vacío */
 .vacio {
     text-align: center;
-    color: #7a5c44;
-    margin-top: 60px;
-    font-size: 1.1rem;
+    padding: 80px 20px;
+    color: var(--pico-muted-color);
 }
 
-.resultado-busqueda {
-    text-align: center;
-    color: #7a5c44;
+.vacio p {
+    font-size: 1.2rem;
     margin-bottom: 20px;
-    font-size: 0.95rem;
+}
+
+.vacio a {
+    width: auto;
+    display: inline-block;
 }

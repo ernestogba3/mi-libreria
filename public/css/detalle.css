@@ -1,88 +1,121 @@
-.tarjeta {
-    background: white;
-    max-width: 500px;
+.detalle-wrapper {
+    max-width: 680px;
     margin: 0 auto;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-top: 6px solid #3d2b1f;
 }
 
-.titulo { color: #3d2b1f; font-size: 1.8rem; margin-bottom: 8px; }
-.autor { color: #7a5c44; font-size: 1.1rem; margin-bottom: 20px; }
-
-.badge {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-bottom: 12px;
+/* Header */
+.detalle-header {
+    text-align: center;
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+    margin-bottom: 32px;
 }
 
-.pendiente { background: #fdebd0; color: #d35400; }
-.leyendo { background: #d5f5e3; color: #1e8449; }
-.terminado { background: #d6eaf8; color: #1a5276; }
-
-.genero {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    background: #f0e6d3;
-    color: #3d2b1f;
-    margin-left: 8px;
-    margin-bottom: 12px;
+.detalle-badges {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
 }
 
-.estrellas { color: #f0a500; font-size: 1.5rem; margin-bottom: 20px; }
+.detalle-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
 
-.fechas {
-    color: #7a5c44;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+.detalle-autor {
+    color: var(--pico-muted-color);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 16px;
+}
+
+.estrellas.grande {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Cuerpo */
+.detalle-cuerpo {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 24px;
+    margin-bottom: 40px;
 }
 
-.notas {
-    background: #f5f0eb;
-    padding: 16px;
-    border-radius: 6px;
-    margin-bottom: 30px;
+/* Fechas */
+.detalle-fechas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: var(--pico-card-sectioning-background-color);
+    padding: 20px;
+    border-radius: var(--pico-border-radius);
 }
 
-.notas h3 { color: #3d2b1f; font-size: 0.95rem; margin-bottom: 8px; }
-.notas p { color: #7a5c44; font-size: 0.9rem; line-height: 1.6; }
+.fecha-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
 
-.acciones { display: flex; gap: 10px; margin-bottom: 0; }
+.fecha-label {
+    font-size: 0.8rem;
+    color: var(--pico-muted-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 
-.btn-editar {
-    background: #f0a500;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
+.fecha-valor {
+    font-weight: 500;
     font-size: 0.95rem;
 }
 
-.btn-eliminar {
-    background: #e74c3c;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.fecha-separador {
+    color: var(--pico-muted-color);
+    font-size: 1.2rem;
+}
+
+/* Notas */
+.detalle-notas {
+    background: var(--pico-card-background-color);
+    border-left: 3px solid var(--pico-primary);
+    padding: 20px 24px;
+    border-radius: var(--pico-border-radius);
+}
+
+.detalle-notas h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--pico-muted-color);
+}
+
+.detalle-notas p {
+    margin: 0;
+    line-height: 1.7;
     font-size: 0.95rem;
 }
 
-.btn-volver {
-    display: block;
+/* Acciones */
+.detalle-acciones {
+    display: flex;
+    gap: 12px;
+}
+
+.detalle-acciones a,
+.detalle-acciones form {
+    flex: 1;
+    margin: 0;
+}
+
+.detalle-acciones button {
+    width: 100%;
+    margin: 0;
+}
+
+.detalle-acciones a[role="button"] {
     text-align: center;
-    margin-top: 20px;
-    color: #7a5c44;
-    text-decoration: none;
 }
