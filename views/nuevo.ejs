@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Libro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f0eb; min-height: 100vh; padding: 40px 20px; }
+        h1 { text-align: center; color: #3d2b1f; margin-bottom: 30px; }
+        .formulario { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        label { display: block; color: #3d2b1f; font-weight: bold; margin-bottom: 6px; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+        .btn-guardar { width: 100%; background: #3d2b1f; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+        .btn-cancelar { display: block; text-align: center; margin-top: 12px; color: #7a5c44; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <h1>📖 Añadir nuevo libro</h1>
+
+    <div class="formulario">
+        <form action="/libros" method="POST">
+
+            <label>Título</label>
+            <input type="text" name="titulo" placeholder="Título del libro" required>
+
+            <label>Autor</label>
+            <input type="text" name="autor" placeholder="Nombre del autor" required>
+
+            <label>Estado</label>
+            <select name="estado">
+                <option value="pendiente">Pendiente</option>
+                <option value="leyendo">Leyendo</option>
+                <option value="terminado">Terminado</option>
+            </select>
+
+            <label>Valoración</label>
+            <select name="valoracion">
+                <option value="0">Sin valorar</option>
+                <option value="1">★ 1</option>
+                <option value="2">★★ 2</option>
+                <option value="3">★★★ 3</option>
+                <option value="4">★★★★ 4</option>
+                <option value="5">★★★★★ 5</option>
+            </select>
+
+            <button class="btn-guardar" type="submit">💾 Guardar libro</button>
+        </form>
+
+        <a class="btn-cancelar" href="/libros">↩️ Cancelar</a>
+    </div>
+
+</body>
+</html>

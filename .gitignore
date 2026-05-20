@@ -1,0 +1,12 @@
+# Dependencias (se reinstalan con npm install)
+node_modules/
+
+# Base de datos local (cada uno tendrá la suya)
+*.db
+
+# Variables de entorno (contraseñas, claves API)
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
