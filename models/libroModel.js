@@ -11,6 +11,10 @@ const libroModel = {
 
     },
 
+    buscar:(termino) =>{
+        return db.prepare('SELECT * FROM libros WHERE titulo LIKE ? OR autor LIKE ?').all(`%${termino}%`,`%${termino}`);
+    },
+
     obtenerPorId: (id) => {
         return db.prepare('SELECT * FROM libros WHERE id = ?').get(id);
     },

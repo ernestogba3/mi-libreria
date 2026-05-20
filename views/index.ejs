@@ -9,6 +9,10 @@
         h1 { text-align: center; color: #3d2b1f; font-size: 2rem; margin-bottom: 10px; }
         .subtitulo { text-align: center; color: #7a5c44; margin-bottom: 30px; }
         .btn-nuevo { display: block; width: fit-content; margin: 0 auto 20px; background: #3d2b1f; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; }
+        .buscador { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .buscador input { padding: 8px 16px; border: 1px solid #ddd; border-radius: 20px; font-size: 0.95rem; width: 300px; }
+        .buscador button { padding: 8px 16px; background: #3d2b1f; color: white; border: none; border-radius: 20px; cursor: pointer; }
+        .btn-limpiar { display: block; text-align: center; color: #7a5c44; font-size: 0.85rem; margin-bottom: 20px; text-decoration: none; }
         .filtros { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
         .filtro { padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; background: #e0d6cc; color: #3d2b1f; }
         .filtro.activo { background: #3d2b1f; color: white; }
@@ -25,6 +29,7 @@
         .btn-editar { background: #f0a500; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 0.85rem; }
         .btn-eliminar { background: #e74c3c; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
         .vacio { text-align: center; color: #7a5c44; margin-top: 60px; font-size: 1.1rem; }
+        .resultado-busqueda { text-align: center; color: #7a5c44; margin-bottom: 20px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -34,31 +39,45 @@
 
     <a class="btn-nuevo" href="/libros/nuevo">+ Añadir libro</a>
 
-      <!-- Botones de filtro -->
+    <!-- Buscador -->
+    <form class="buscador" action="/libros" method="GET">
+        <input
+            type="text"
+            name="busqueda"
+            placeholder="Buscar por título o autor..."
+            value="<%= busqueda || '' %>"
+        >
+        <button type="submit">🔍 Buscar</button>
+    </form>
+
+    <!-- Enlace para limpiar búsqueda -->
+    <% if (busqueda) { %>
+        <a class="btn-limpiar" href="/libros">✕ Limpiar búsqueda</a>
+        <p class="resultado-busqueda">Resultados para: <strong>"<%= busqueda %>"</strong></p>
+    <% } %>
+
+    <!-- Filtros por estado -->
     <div class="filtros">
-        <a href="/libros"class="filtro <%= !estado ? 'activo' : '' %>">Todos</a>
+        <a href="/libros" class="filtro <%= !estado && !busqueda ? 'activo' : '' %>">Todos</a>
         <a href="/libros?estado=pendiente" class="filtro <%= estado === 'pendiente' ? 'activo' : '' %>">Pendiente</a>
         <a href="/libros?estado=leyendo" class="filtro <%= estado === 'leyendo' ? 'activo' : '' %>">Leyendo</a>
         <a href="/libros?estado=terminado" class="filtro <%= estado === 'terminado' ? 'activo' : '' %>">Terminado</a>
     </div>
 
     <% if (lista.length === 0) { %>
-        <p class="vacio">Tu estantería está vacía, ¡añade tu primer libro!</p>
+        <p class="vacio">No se encontraron libros.</p>
     <% } else { %>
         <div class="grid">
             <% lista.forEach(libro => { %>
                 <div class="card">
                     <h2><%= libro.titulo %></h2>
                     <p class="autor"><%= libro.autor %></p>
-
                     <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
-
                     <p class="estrellas">
                         <% for(let i = 1; i <= 5; i++) { %>
                             <%= i <= libro.valoracion ? '★' : '☆' %>
                         <% } %>
                     </p>
-
                     <div class="acciones">
                         <a class="btn-editar" href="/libros/<%= libro.id %>/editar">✏️ Editar</a>
                         <form action="/libros/<%= libro.id %>?_method=DELETE" method="POST">
