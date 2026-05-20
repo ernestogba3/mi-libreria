@@ -28,14 +28,14 @@ const libroController = {
     },
 
     crearLibro: (req,res) =>{
-        const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin} = req.body;
+        const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero} = req.body;
         const errores = validarLibro(req.body);
 
         if(errores.length >0){
             return res.render('nuevo',{errores,datos:req.body});
         }
 
-        libroModel.guardar(titulo,autor,estado,valoracion,fecha_inicio || null ,fecha_fin || null);
+        libroModel.guardar(titulo,autor,estado,valoracion,fecha_inicio || null ,fecha_fin || null,genero || null);
         res.redirect('/libros');
     },
 
@@ -45,14 +45,14 @@ const libroController = {
     },
 
     actualizarLibro: (req,res) =>{
-         const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin} = req.body;
+         const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero} = req.body;
           // Si hay errores vuelve al formulario mostrándolos
         if (errores.length > 0) {
             const libro = { ...req.body, id: req.params.id };
             return res.render('editar', { libro, errores });
         }
-        
-         libroModel.actualizar(req.params.id,titulo,autor,estado,valoracion,fecha_inicio || null,fecha_fin || null);
+
+         libroModel.actualizar(req.params.id,titulo,autor,estado,valoracion,fecha_inicio || null,fecha_fin || null,genero || null);
          res.redirect('/libros');
     },
 

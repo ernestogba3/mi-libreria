@@ -24,7 +24,6 @@
 
     <div class="formulario">
 
-        <!-- Muestra errores si los hay -->
         <% if (errores.length > 0) { %>
             <div class="errores">
                 <% errores.forEach(error => { %>
@@ -42,6 +41,22 @@
             <label>Autor</label>
             <input type="text" name="autor" placeholder="Nombre del autor"
                 value="<%= typeof datos !== 'undefined' ? datos.autor : '' %>" required>
+
+            <!-- 👇 Nuevo campo género -->
+            <label>Género</label>
+            <select name="genero">
+                <option value="">Sin especificar</option>
+                <option value="Ficción" <%= typeof datos !== 'undefined' && datos.genero === 'Ficción' ? 'selected' : '' %>>Ficción</option>
+                <option value="No ficción" <%= typeof datos !== 'undefined' && datos.genero === 'No ficción' ? 'selected' : '' %>>No ficción</option>
+                <option value="Fantasía" <%= typeof datos !== 'undefined' && datos.genero === 'Fantasía' ? 'selected' : '' %>>Fantasía</option>
+                <option value="Ciencia ficción" <%= typeof datos !== 'undefined' && datos.genero === 'Ciencia ficción' ? 'selected' : '' %>>Ciencia ficción</option>
+                <option value="Terror" <%= typeof datos !== 'undefined' && datos.genero === 'Terror' ? 'selected' : '' %>>Terror</option>
+                <option value="Misterio" <%= typeof datos !== 'undefined' && datos.genero === 'Misterio' ? 'selected' : '' %>>Misterio</option>
+                <option value="Romance" <%= typeof datos !== 'undefined' && datos.genero === 'Romance' ? 'selected' : '' %>>Romance</option>
+                <option value="Historia" <%= typeof datos !== 'undefined' && datos.genero === 'Historia' ? 'selected' : '' %>>Historia</option>
+                <option value="Biografía" <%= typeof datos !== 'undefined' && datos.genero === 'Biografía' ? 'selected' : '' %>>Biografía</option>
+                <option value="Autoayuda" <%= typeof datos !== 'undefined' && datos.genero === 'Autoayuda' ? 'selected' : '' %>>Autoayuda</option>
+            </select>
 
             <label>Estado</label>
             <select name="estado">

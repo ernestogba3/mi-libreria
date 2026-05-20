@@ -9,10 +9,11 @@
         .tarjeta { background: white; max-width: 500px; margin: 0 auto; padding: 40px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 6px solid #3d2b1f; }
         .titulo { color: #3d2b1f; font-size: 1.8rem; margin-bottom: 8px; }
         .autor { color: #7a5c44; font-size: 1.1rem; margin-bottom: 20px; }
-        .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin-bottom: 20px; }
+        .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin-bottom: 12px; }
         .pendiente { background: #fdebd0; color: #d35400; }
         .leyendo { background: #d5f5e3; color: #1e8449; }
         .terminado { background: #d6eaf8; color: #1a5276; }
+        .genero { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.9rem; background: #f0e6d3; color: #3d2b1f; margin-left: 8px; margin-bottom: 12px; }
         .estrellas { color: #f0a500; font-size: 1.5rem; margin-bottom: 20px; }
         .fechas { color: #7a5c44; font-size: 0.9rem; margin-bottom: 30px; display: flex; flex-direction: column; gap: 6px; }
         .acciones { display: flex; gap: 10px; }
@@ -27,7 +28,13 @@
         <h1 class="titulo">📖 <%= libro.titulo %></h1>
         <p class="autor">✍️ <%= libro.autor %></p>
 
-        <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
+        <div>
+            <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
+            <!-- 👇 Nuevo: muestra el género si existe -->
+            <% if (libro.genero) { %>
+                <span class="genero">🏷️ <%= libro.genero %></span>
+            <% } %>
+        </div>
 
         <p class="estrellas">
             <% for(let i = 1; i <= 5; i++) { %>
@@ -35,7 +42,6 @@
             <% } %>
         </p>
 
-        <!-- 👇 Fechas -->
         <div class="fechas">
             <span>📅 Inicio: <%= libro.fecha_inicio || 'Sin registrar' %></span>
             <span>🏁 Fin: <%= libro.fecha_fin || 'Sin registrar' %></span>
