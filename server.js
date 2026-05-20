@@ -20,6 +20,7 @@ app.post('/libros', libroController.crearLibro);
 app.get('/libros/:id/editar', libroController.mostrarEdicion);
 app.put('/libros/:id', libroController.actualizarLibro);
 app.delete('/libros/:id', libroController.eliminarLibro);
+app.get('/libros/:id',libroController.verDetalle);
 
 const PORT = 3000;
 

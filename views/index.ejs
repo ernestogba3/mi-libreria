@@ -70,7 +70,7 @@
         <div class="grid">
             <% lista.forEach(libro => { %>
                 <div class="card">
-                    <h2><%= libro.titulo %></h2>
+                    <h2><a href="/libros/<%= libro.id %>" style="color: #3d2b1f; text-decoration: none;"><%= libro.titulo %></a></h2>
                     <p class="autor"><%= libro.autor %></p>
                     <span class="badge <%= libro.estado %>"><%= libro.estado %></span>
                     <p class="estrellas">

@@ -16,6 +16,12 @@ const libroController = {
         res.render('index',{lista,estado,busqueda}); //pasa el estado activo a la vista
     },
 
+    verDetalle: (req,res) =>{
+
+        const libro = libroModel.obtenerPorId(req.params.id);
+        res.render('detalle',{libro});
+    },
+
     mostrarFormularioNuevo: (req,res) =>{
         res.render('nuevo');
     },
