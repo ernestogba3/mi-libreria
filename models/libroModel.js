@@ -19,14 +19,14 @@ const libroModel = {
         return db.prepare('SELECT * FROM libros WHERE id = ?').get(id);
     },
 
-    guardar: (titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero) =>{
-        return db.prepare('INSERT INTO libros(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero) VALUES (?,?,?,?,?,?,?)').run(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero);
+    guardar: (titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,notas) =>{
+        return db.prepare('INSERT INTO libros(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,notas) VALUES (?,?,?,?,?,?,?,?)').run(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,notas);
     },
 
-    actualizar: (id,titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero) =>{
+    actualizar: (id,titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,notas) =>{
         return db.prepare(`UPDATE libros SET titulo = ?,
-            autor = ?,estado = ?, valoracion = ?, fecha_inicio = ?,genero = ?, fecha_fin = ?
-            WHERE id = ?`).run(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,id);
+            autor = ?,estado = ?, valoracion = ?, fecha_inicio = ?, fecha_fin = ?,genero = ?, notas = ?
+            WHERE id = ?`).run(titulo,autor,estado,valoracion,fecha_inicio,fecha_fin,genero,notas,id);
     },
 
     eliminar: (id) =>{

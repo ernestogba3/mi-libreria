@@ -8,11 +8,18 @@ const sql = 'CREATE TABLE IF NOT EXISTS libros (' +
     'autor TEXT NOT NULL,' +
     'estado TEXT DEFAULT pendiente,' +
     'valoracion INTEGER DEFAULT 0,' +
-    'genero TEXT DEFAULT NULL,' +
     'fecha_inicio TEXT DEFAULT NULL,' +
-    'fecha_fin TEXT DEFAULT NULL' +
+    'fecha_fin TEXT DEFAULT NULL,' +
+    'genero TEXT DEFAULT NULL,' +
+    'notas TEXT DEFAULT NULL' +
 ')';
 
 db.exec(sql);
+
+try {
+    db.exec('ALTER TABLE libros ADD COLUMN notas TEXT DEFAULT NULL');
+} catch (e) {
+    // La columna ya existe, ignoramos el error
+}
 
 module.exports = db;

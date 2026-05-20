@@ -42,6 +42,11 @@ const validarLibro = (datos) => {
         errores.push('Un libro terminado debe tener valoración.');
     }
 
+    // 👇 Nueva validación de notas
+    if (datos.notas && datos.notas.length > 500) {
+        errores.push(`Las notas no pueden superar los 500 caracteres (actualmente: ${datos.notas.length}).`);
+    }
+
     return errores;
 };
 
