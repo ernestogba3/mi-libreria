@@ -7,7 +7,9 @@ const sql = 'CREATE TABLE IF NOT EXISTS libros (' +
     'titulo TEXT NOT NULL,' +
     'autor TEXT NOT NULL,' +
     'estado TEXT DEFAULT pendiente,' +
-    'valoracion INTEGER DEFAULT 0' +
+    'valoracion INTEGER DEFAULT 0,' +
+    'fecha_inicio TEXT DEFAULT NULL,' +
+    'fecha_fin TEXT DEFAULT NULL' +
 ')';
 
 db.exec(sql);

@@ -10,6 +10,7 @@
         .formulario { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         label { display: block; color: #3d2b1f; font-weight: bold; margin-bottom: 6px; }
         input, select { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+        .hint { color: #7a5c44; font-size: 0.8rem; margin-top: -16px; margin-bottom: 16px; }
         .btn-guardar { width: 100%; background: #3d2b1f; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
         .btn-cancelar { display: block; text-align: center; margin-top: 12px; color: #7a5c44; text-decoration: none; }
     </style>
@@ -19,7 +20,6 @@
     <h1>✏️ Editar libro</h1>
 
     <div class="formulario">
-        <!-- method-override convierte el POST en PUT -->
         <form action="/libros/<%= libro.id %>?_method=PUT" method="POST">
 
             <label>Título</label>
@@ -44,6 +44,15 @@
                 <option value="4" <%= libro.valoracion == 4 ? 'selected' : '' %>>★★★★ 4</option>
                 <option value="5" <%= libro.valoracion == 5 ? 'selected' : '' %>>★★★★★ 5</option>
             </select>
+
+            <!-- 👇 Nuevos campos de fecha -->
+            <label>Fecha de inicio</label>
+            <input type="date" name="fecha_inicio" value="<%= libro.fecha_inicio || '' %>">
+            <p class="hint">Opcional — cuándo empezaste a leerlo</p>
+
+            <label>Fecha de fin</label>
+            <input type="date" name="fecha_fin" value="<%= libro.fecha_fin || '' %>">
+            <p class="hint">Opcional — cuándo lo terminaste</p>
 
             <button class="btn-guardar" type="submit">💾 Guardar cambios</button>
         </form>

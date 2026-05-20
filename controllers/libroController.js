@@ -27,8 +27,8 @@ const libroController = {
     },
 
     crearLibro: (req,res) =>{
-        const {titulo,autor,estado,valoracion} = req.body;
-        libroModel.guardar(titulo,autor,estado,valoracion);
+        const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin} = req.body;
+        libroModel.guardar(titulo,autor,estado,valoracion,fecha_inicio || null ,fecha_fin || null);
         res.redirect('/libros');
     },
 
@@ -38,8 +38,8 @@ const libroController = {
     },
 
     actualizarLibro: (req,res) =>{
-         const {titulo,autor,estado,valoracion} = req.body;
-         libroModel.actualizar(req.params.id,titulo,autor,estado,valoracion);
+         const {titulo,autor,estado,valoracion,fecha_inicio,fecha_fin} = req.body;
+         libroModel.actualizar(req.params.id,titulo,autor,estado,valoracion,fecha_inicio || null,fecha_fin || null);
          res.redirect('/libros');
     },
 
