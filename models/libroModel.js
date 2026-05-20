@@ -5,6 +5,12 @@ const libroModel = {
         return db.prepare('SELECT * from libros').all();
     },
 
+    obtenerPorEstado:(estado) =>{
+
+        return db.prepare('SELECT * FROM libros WHERE estado = ?').all(estado);
+
+    },
+
     obtenerPorId: (id) => {
         return db.prepare('SELECT * FROM libros WHERE id = ?').get(id);
     },

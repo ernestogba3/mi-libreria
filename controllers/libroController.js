@@ -3,8 +3,10 @@ const libroModel = require('../models/libroModel');
 const libroController = {
 
     verLibros:(req,res) =>{
-        const lista = libroModel.obtenerTodos();
-        res.render('index',{lista});
+        const {estado} = req.query; // lee ?estado=leyendo de la URL
+        const lista = estado ? libroModel.obtenerPorEstado(estado) //Si hay filtro, lo filtra
+        : libroModel.obtenerTodos(); //Si no hay filtro, extrae todo
+        res.render('index',{lista,estado}); //pasa el estado activo a la vista
     },
 
     mostrarFormularioNuevo: (req,res) =>{
